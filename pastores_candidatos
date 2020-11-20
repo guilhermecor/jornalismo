@@ -1,0 +1,225 @@
+-- Código para achar a quantidade de pastores aptos (pastor, pastoras, pr, pr.) no Brasil todo
+
+SELECT NM_PARTIDO AS Partido, count(DS_OCUPACAO) AS Pastores
+FROM brasil_2020
+WHERE NM_URNA_CANDIDATO 
+	LIKE '%pastora%' AND DS_SITUACAO_CANDIDATURA = 'APTO'
+	OR NM_URNA_CANDIDATO LIKE '%pr %' AND DS_SITUACAO_CANDIDATURA = 'APTO'
+	OR NM_URNA_CANDIDATO LIKE '%pr.%' AND DS_SITUACAO_CANDIDATURA = 'APTO'
+	OR NM_URNA_CANDIDATO LIKE '%pastor%' AND DS_SITUACAO_CANDIDATURA = 'APTO'
+GROUP BY NM_PARTIDO;
+
+-- Código para achar a quantidade de bispos e bispas aptos no Brasil todo
+
+SELECT NM_PARTIDO AS Partido, count(DS_OCUPACAO) AS Bispos
+FROM brasil_2020
+WHERE NM_URNA_CANDIDATO 
+	LIKE '%bispo%' OR NM_URNA_CANDIDATO LIKE '%bispa%'
+	AND DS_SITUACAO_CANDIDATURA = 'APTO'
+GROUP BY NM_PARTIDO;
+
+-- Código para achar a quantidade de padres aptos no Brasil todo
+
+SELECT NM_PARTIDO AS Partido, count(DS_OCUPACAO) AS Padres
+FROM brasil_2020
+WHERE NM_URNA_CANDIDATO 
+	LIKE '%padre%'
+	AND DS_SITUACAO_CANDIDATURA = 'APTO'
+GROUP BY NM_PARTIDO
+ORDER BY Padres DESC;
+
+-- Código para achar a quantidade de candidatos aptos no Brasil todo
+
+SELECT NM_PARTIDO AS Partido, count(DS_OCUPACAO) AS Candidatos
+FROM brasil_2020
+WHERE DS_SITUACAO_CANDIDATURA = 'APTO'
+GROUP BY SG_PARTIDO
+ORDER BY Candidatos DESC
+
+-- Código para achar a quantidade de pastores aptos por estado
+
+SELECT SG_UF AS Estado, count(NM_CANDIDATO) AS Pastores
+FROM brasil_2020
+WHERE NM_URNA_CANDIDATO 
+	LIKE '%pastora%' OR NM_URNA_CANDIDATO LIKE '%pr %' OR NM_URNA_CANDIDATO LIKE '%pr.%' OR NM_URNA_CANDIDATO LIKE '%pastor%'
+	AND DS_SITUACAO_CANDIDATURA = 'APTO'
+GROUP BY SG_UF;
+
+-- Código para achar a quantidade de candidatos aptos por estado
+
+SELECT SG_UF AS Estado, count(NM_CANDIDATO) AS Candidatos
+FROM brasil_2020
+WHERE DS_SITUACAO_CANDIDATURA = 'APTO'
+GROUP BY SG_UF;
+
+-- Código para achar a quantidade de pastores eleitos no Brasil todo
+
+SELECT SG_UF AS Estado, count(DS_OCUPACAO) AS Pastores
+FROM brasil_2016
+WHERE (DS_SIT_TOT_TURNO = 'ELEITO' OR 'ELEITO POR MÉDIA' OR 'ELEITO POR QP')
+	AND (NM_URNA_CANDIDATO LIKE '%pastora%' OR '%pr %' OR '%pastor%' OR '%pr.%')
+GROUP BY SG_UF;
+
+-- Código para achar a quantidade de pastores aptos por estado
+
+SELECT SG_UF AS Estado, count(NM_CANDIDATO) AS Pastores
+FROM brasil_2016
+WHERE NM_URNA_CANDIDATO
+	LIKE '%pastora%' OR NM_URNA_CANDIDATO LIKE '%pr %' OR NM_URNA_CANDIDATO LIKE '%pr.%' OR NM_URNA_CANDIDATO LIKE '%pastor%'
+	AND DS_SITUACAO_CANDIDATURA = 'APTO'
+GROUP BY SG_UF;
+
+-- Código para achar a quantidade de candidatos aptos por estado
+
+SELECT SG_UF AS Estado, count(NM_CANDIDATO) AS Candidatos
+FROM brasil_2016
+WHERE DS_SITUACAO_CANDIDATURA = 'APTO'
+GROUP BY SG_UF;
+
+-- Código para achar a quantidade de candidatos eleitos no Brasil todo
+
+SELECT SG_UF AS Estado, count(DS_OCUPACAO) AS Candidatos
+FROM brasil_2016
+WHERE DS_SIT_TOT_TURNO = 'ELEITO' AND DS_SITUACAO_CANDIDATURA = 'APTO' OR DS_SIT_TOT_TURNO = 'ELEITO POR QP' AND DS_SITUACAO_CANDIDATURA = 'APTO' OR DS_SIT_TOT_TURNO = 'ELEITO POR MÉDIA' AND DS_SITUACAO_CANDIDATURA = 'APTO'
+GROUP BY SG_UF;
+
+-- Código para achar a quantidade de pastores aptos (pastor, pastoras, pr, pr.) no Brasil todo
+
+SELECT NM_PARTIDO AS Partido, count(DS_OCUPACAO) AS Pastores
+FROM brasil_2020
+WHERE NM_URNA_CANDIDATO 
+	LIKE '%pastora%' OR NM_URNA_CANDIDATO
+	LIKE '%pr %' OR NM_URNA_CANDIDATO
+	LIKE '%pr.%' OR NM_URNA_CANDIDATO
+	LIKE '%pastor%'
+	AND DS_SITUACAO_CANDIDATURA = 'APTO'
+GROUP BY NM_PARTIDO
+ORDER BY Pastores DESC;
+
+-- Código para achar a quantidade de bispos e bispas aptos no Brasil todo
+
+SELECT NM_PARTIDO AS Partido, count(DS_OCUPACAO) AS Bispos
+FROM brasil_2020
+WHERE NM_URNA_CANDIDATO 
+	LIKE '%bispo%' OR NM_URNA_CANDIDATO LIKE '%bispa%'
+	AND DS_SITUACAO_CANDIDATURA = 'APTO'
+GROUP BY NM_PARTIDO;
+
+-- Código para achar a quantidade de padres aptos no Brasil todo
+
+SELECT NM_PARTIDO AS Partido, count(DS_OCUPACAO) AS Padres
+FROM brasil_2020
+WHERE NM_URNA_CANDIDATO 
+	LIKE '%padre%'
+	AND DS_SITUACAO_CANDIDATURA = 'APTO'
+GROUP BY NM_PARTIDO
+ORDER BY Padres DESC;
+
+-- Código para achar a quantidade de candidatos aptos no Brasil todo
+
+SELECT NM_PARTIDO AS Partido, count(DS_OCUPACAO) AS Candidatos
+FROM brasil_2020
+WHERE DS_SITUACAO_CANDIDATURA = 'APTO'
+GROUP BY SG_PARTIDO
+ORDER BY Candidatos DESC
+
+-- Código para achar a quantidade de pastores aptos por estado
+
+SELECT SG_UF AS Estado, count(NM_CANDIDATO) AS Pastores
+FROM brasil_2020
+WHERE NM_URNA_CANDIDATO 
+	LIKE '%pastora%' OR NM_URNA_CANDIDATO LIKE '%pr %' OR NM_URNA_CANDIDATO LIKE '%pr.%' OR NM_URNA_CANDIDATO LIKE '%pastor%'
+	AND DS_SITUACAO_CANDIDATURA = 'APTO'
+GROUP BY SG_UF;
+
+-- Código para achar a quantidade de candidatos aptos por estado
+
+SELECT SG_UF AS Estado, count(NM_CANDIDATO) AS Candidatos
+FROM brasil_2020
+WHERE DS_SITUACAO_CANDIDATURA = 'APTO'
+GROUP BY SG_UF;
+
+-- Código para achar a quantidade de pastores aptos (pastor, pastoras, pr, pr.) em CG(dados antigos)
+
+SELECT count(field1) AS Pastores
+FROM brasil_2000
+WHERE field15
+	LIKE '%pastora%' AND field6 = 'MS' AND field8 = 'CAMPO GRANDE' AND field17 = 'DEFERIDO'
+	OR field15 LIKE '%pr %' AND field6 = 'MS' AND field8 = 'CAMPO GRANDE' AND field17 = 'DEFERIDO'
+	OR field15 LIKE '%pr.%' AND field6 = 'MS' AND field8 = 'CAMPO GRANDE' AND field17 = 'DEFERIDO'
+	OR field15 LIKE '%pastor%' AND field6 = 'MS' AND field8 = 'CAMPO GRANDE' AND field17 = 'DEFERIDO'
+GROUP BY field3;
+
+-- Código para achar a quantidade de pastores aptos (pastor, pastoras, pr, pr.) em CG (dados novos)
+
+SELECT count(NR_CPF_CANDIDATO) AS Pastores
+FROM brasil_2016
+WHERE
+	NM_URNA_CANDIDATO LIKE '%pastor%' AND SG_UF = 'MS' AND NM_UE = 'CAMPO GRANDE' AND DS_SITUACAO_CANDIDATURA = 'APTO' OR
+	NM_URNA_CANDIDATO LIKE '%pastora%' AND SG_UF = 'MS' AND NM_UE = 'CAMPO GRANDE' AND DS_SITUACAO_CANDIDATURA = 'APTO' OR
+	NM_URNA_CANDIDATO LIKE '%pr %' AND SG_UF = 'MS' AND NM_UE = 'CAMPO GRANDE' AND DS_SITUACAO_CANDIDATURA = 'APTO' OR
+	NM_URNA_CANDIDATO LIKE '%pr.%' AND SG_UF = 'MS' AND NM_UE = 'CAMPO GRANDE' AND DS_SITUACAO_CANDIDATURA = 'APTO' 
+GROUP BY DT_ELEICAO;
+
+-- Código para achar a quantidade de pastores aptos (pastor, pastoras, pr, pr.) no MS todo (dados antigos)
+
+SELECT count(field1) AS Pastores
+FROM brasil_2000
+WHERE field15
+	LIKE '%pastora%' AND field6 = 'MS' AND field17 = 'DEFERIDO'
+	OR field15 LIKE '%pr %' AND field6 = 'MS' AND field17 = 'DEFERIDO'
+	OR field15 LIKE '%pr.%' AND field6 = 'MS' AND field17 = 'DEFERIDO'
+	OR field15 LIKE '%pastor%' AND field6 = 'MS' AND field17 = 'DEFERIDO'
+GROUP BY field3;
+
+-- Código para achar a quantidade de pastores aptos (pastor, pastoras, pr, pr.) no BR todo (dados antigos)
+
+SELECT count(field1) AS Pastores
+FROM brasil_2000
+WHERE field15
+	LIKE '%pastora%' AND field17 = 'DEFERIDO'
+	OR field15 LIKE '%pr %' AND field17 = 'DEFERIDO'
+	OR field15 LIKE '%pr.%' AND field17 = 'DEFERIDO'
+	OR field15 LIKE '%pastor%' AND field17 = 'DEFERIDO'
+GROUP BY field3;
+
+-- Código para achar a quantidade de pastores aptos (pastor, pastoras, pr, pr.) em Mato Grosso do Sul por partido
+
+SELECT NM_PARTIDO AS Partido, count(NR_CPF_CANDIDATO) AS Pastores
+FROM brasil_2020
+WHERE 
+	NM_URNA_CANDIDATO LIKE '%pastor%' AND SG_UF = 'MS' AND DS_SITUACAO_CANDIDATURA = 'APTO' OR
+	NM_URNA_CANDIDATO LIKE '%pastora%' AND SG_UF = 'MS' AND DS_SITUACAO_CANDIDATURA = 'APTO' OR
+	NM_URNA_CANDIDATO LIKE '%pr %' AND SG_UF = 'MS' AND DS_SITUACAO_CANDIDATURA = 'APTO' OR
+	NM_URNA_CANDIDATO LIKE '%pr.%' AND SG_UF = 'MS' AND DS_SITUACAO_CANDIDATURA = 'APTO'
+GROUP BY Partido
+ORDER BY Pastores DESC;
+
+-- Código para achar a quantidade de pastores aptos (pastor, pastoras, pr, pr.) em Mato Grosso do Sul por cidade
+
+SELECT NM_UE AS Cidade, count(NR_CPF_CANDIDATO) AS Pastores
+FROM brasil_2020
+WHERE
+	NM_URNA_CANDIDATO LIKE '%pastor%' AND SG_UF = 'MS' AND DS_SITUACAO_CANDIDATURA = 'APTO' OR
+	NM_URNA_CANDIDATO LIKE '%pastora%' AND SG_UF = 'MS' AND DS_SITUACAO_CANDIDATURA = 'APTO' OR
+	NM_URNA_CANDIDATO LIKE '%pr %' AND SG_UF = 'MS' AND DS_SITUACAO_CANDIDATURA = 'APTO' OR
+	NM_URNA_CANDIDATO LIKE '%pr.%' AND SG_UF = 'MS' AND DS_SITUACAO_CANDIDATURA = 'APTO' 
+GROUP BY Cidade;
+
+-- Código para achar a quantidade de candidatos aptos em Mato Grosso do Sul por cidade
+
+SELECT NM_UE AS Cidade, count(NR_CPF_CANDIDATO) AS C
+FROM brasil_2020
+WHERE SG_UF = 'MS' AND DS_SITUACAO_CANDIDATURA = 'APTO'
+GROUP BY Cidade;
+
+-- Código para achar a quantidade de pastores aptos e eleitos no Brasil por estado
+
+SELECT uf AS Estado, count(turno) AS Pastores
+FROM eleicoes_2020
+WHERE 
+	nome LIKE '%pastor%'AND situacao = 'Eleito' OR
+	nome LIKE '%pastora%'  AND situacao = 'Eleito' OR
+	nome LIKE '%pr %' AND situacao = 'Eleito' OR
+	nome LIKE '%pr.%' AND situacao = 'Eleito'
+GROUP BY Estado;
